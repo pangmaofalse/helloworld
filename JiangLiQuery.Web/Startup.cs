@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using JiangLiQuery.Web.Data;
@@ -11,6 +12,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 
 namespace JiangLiQuery.Web
 {
@@ -46,8 +48,10 @@ namespace JiangLiQuery.Web
             //app.UseDefaultFiles();
             app.UseStaticFiles();//使用静态文件
 
-            app.UseStaticFiles(new StaticFileOptions { 
-                RequestPath="/node_modules"
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                RequestPath = "/node_modules",
+                FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, "node_modules"))
             });
 
             //app.UseMvcWithDefaultRoute();//使用MVC默认框架路由
