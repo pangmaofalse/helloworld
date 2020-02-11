@@ -1,0 +1,31 @@
+﻿
+@model HomeIndexViewModel
+@{
+    ViewBag.Title = "Home Index";
+
+    //Layout="~/Views/Shared/_Layout.cshtml";
+}
+
+@*@Html.PartialAsync("_StudentsTable",Model.Students);*@
+<partial name="_StudentsTable" for="Students" />
+@*
+<ul>
+    @foreach (var s in Model.Students)
+    {
+        <li>
+            @s.Name - @s.Age
+            @Html.ActionLink("明细", "Detail",new { id=s.Id});
+            <a asp-action="Detail" asp-controller="Home" asp-route-id="@s.Id">明细 Tag</a>
+        </li>
+    }
+
+</ul>
+*@
+
+@section bottom{
+    <div>
+        <a asp-action="Create">添加一个学生</a>
+    </div>
+}
+
+@await Component.InvokeAsync("Welcome");
